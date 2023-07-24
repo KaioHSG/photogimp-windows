@@ -1,2 +1,2 @@
-# PhotoGIMP
-### By [Diolinux](https://github.com/Diolinux/PhotoGIMP)
+# PhotoGIMP Windows
+### PhotoGIMP by [Diolinux](https://github.com/Diolinux/PhotoGIMP)
