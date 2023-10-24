@@ -4,9 +4,9 @@
 
 **1**. Install [**GIMP**](https://www.gimp.org/downloads) (2.10+).
 
-**2**. Run `Install PhotoGIMP Windows.bat`.
+**2**. Download [**PhotoGIMP-Windows.zip**](https://github.com/KaioHSG/PhotoGimpWindows/releases/latest).
 
-**3**. Confirm overwriting the previous configuration.
+**3**. Run `Install PhotoGIMP Windows.bat` and confirm the replacement of the previous configuration.
 
 ![PhotoGIMP Windows](https://github.com/KaioHSG/PhotoGimpWindows/assets/96930584/30eef373-eb75-4d20-916d-010db8cbe8fb)
 
