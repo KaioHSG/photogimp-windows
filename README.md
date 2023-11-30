@@ -1,6 +1,6 @@
 # PhotoGIMP Windows
 
-*A GIMP patch for Photoshop users*
+*A GIMP patch for Photoshop users.*
 
 ## How to install?
 
