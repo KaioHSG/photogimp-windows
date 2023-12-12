@@ -2,6 +2,8 @@
 
 *A GIMP patch for Photoshop users.*
 
+![PhotoGIMP Windows](https://github.com/KaioHSG/photogimp-windows/assets/96930584/59b1f646-c0cc-4435-a957-e9a7fab57d40)
+
 ## How to install?
 
 **1**. Install [**GIMP**](https://www.gimp.org/downloads) (2.10).
