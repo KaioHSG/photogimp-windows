@@ -8,10 +8,9 @@
 
 **1**. Install [**GIMP**](https://www.gimp.org/downloads) (2.10).
 
-**2**. Download a version of [**PhotoGIMP Windows**](https://github.com/kaiohsg/photogimp-windows/releases/latest) (`PhotoGIMP-Windows.exe.zip` is best).
+**2**. Download the [**PhotoGIMP Windows**](https://github.com/kaiohsg/photogimp-windows/releases/latest).
 
-**3**. Run `Install PhotoGIMP Windows.exe` and confirm the replacement of the previous configuration. If you downloaded `Install PhotoGIMP Windows.bat` you will need the
-[**PhotoGIMP**](https://github.com/Diolinux/PhotoGIMP/releases/latest) (just leave the `.zip` file with the installer).
+**3**. Run `Install PhotoGIMP Windows.bat` in the same folder as [**PhotoGIMP**](https://github.com/Diolinux/PhotoGIMP/releases/latest) (leave the installer and `PhotoGIMP.zip` in the same folder).
 
 ![PhotoGIMP Windows](https://github.com/KaioHSG/PhotoGimpWindows/assets/96930584/30eef373-eb75-4d20-916d-010db8cbe8fb)
 
