@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/badge/version-2020.1.2-green)](https://github.com/KaioHSG/photogimp-windows/releases/latest)
+[![Version](https://img.shields.io/badge/version-20.1.2-green)](https://github.com/KaioHSG/photogimp-windows/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/KaioHSG/gui-ssd-slow-mark/total)](https://github.com/KaioHSG/photogimp-windows/releases)
 
 # PhotoGIMP Windows
