@@ -10,7 +10,7 @@ if not exist "PhotoGIMP.zip" (
 choice /c yn /m "This will erase all your settings. Continue"
 if %ErrorLevel% equ 2 (exit)
 echo -------------------------------------------------
-tar --strip=0 -xvzf "PhotoGIMP.zip" -C "%UserProfile%\AppData\Roaming\GIMP\2.10" "PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10"
+tar -xvzf "PhotoGIMP.zip" --strip-components=6 -C "%UserProfile%\AppData\Roaming\GIMP" "PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP"
 echo =================================================
 echo Finish.
 pause > nul
