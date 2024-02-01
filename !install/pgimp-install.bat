@@ -1,6 +1,6 @@
 @echo off
 title Install PhotoGIMP Windows
-if not exist "%UserProfile%\AppData\Roaming\GIMP\2.10" mkdir "%UserProfile%\AppData\Roaming\GIMP\2.10"
+if not exist "%UserProfile%\AppData\Roaming\GIMP" mkdir "%UserProfile%\AppData\Roaming\GIMP"
 if not exist "PhotoGIMP.zip" (
     echo You need the "PhotoGIMP.zip". Make sure the file is in the same directory.
     echo Download here: https://github.com/Diolinux/PhotoGIMP/releases/latest
