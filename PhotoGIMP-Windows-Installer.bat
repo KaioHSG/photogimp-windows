@@ -1,6 +1,6 @@
 @echo off
 set version=1.4
-title Installer PhotoGIMP Windows v%version%
+title PhotoGIMP Windows Installer v%version%
 echo PhotoGIMP Windows Installer v%version%
 echo ==================================================
 choice /c yn /m "This will erase your settings (%AppData%\GIMP). Continue"
@@ -28,6 +28,6 @@ curl -L -o "photogimp-data.zip" %url%
 echo -------------------------------------------------
 tar -zxvf "photogimp-data.zip" -C "%AppData%/GIMP" --strip-components=6 "PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/*"
 echo ##################################################
-echo Finish.
+echo Install finish.
 pause > nul
 exit
