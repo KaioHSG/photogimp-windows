@@ -1,7 +1,7 @@
 [![Release](https://img.shields.io/github/v/release/KaioHSG/photogimp-windows)](https://github.com/KaioHSG/photogimp-windows/releases/latest)
 [![PhotoGIMP release](https://img.shields.io/github/v/release/Diolinux/PhotoGIMP?label=photogimp%20release)](https://github.com/Diolinux/PhotoGIMP/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/KaioHSG/photogimp-windows/total)](https://github.com/KaioHSG/photogimp-windows/releases)
-[![VirusTotal](https://img.shields.io/badge/virus%20total-status-navy)](https://www.virustotal.com/gui/search/https%253A%252F%252Fgithub.com%252FKaioHSG%252Fphotogimp-windows%252Farchive%252Frefs%252Fheads%252Fmain.zip)
+[![VirusTotal](https://img.shields.io/badge/virus%20total-status-navy)](https://www.virustotal.com/gui/file/4009bb74cada2d4d14cd8dc2dfd6ed8dff874ae024df1592631b65c357d5646a)
 
 # PhotoGIMP Windows
 
