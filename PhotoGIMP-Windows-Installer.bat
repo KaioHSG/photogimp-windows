@@ -18,12 +18,15 @@ if %errorLevel% neq 0 (
 curl -s https://api.github.com/repos/Diolinux/PhotoGIMP/releases/latest > %temp%\latest-release.json
 for /f "tokens=3 delims=:" %%A in ('findstr /i "browser_download_url" %temp%\latest-release.json') do set url=https:%%A
 del /q "%temp%\latest-release.json"
+if exist "photogimp-data.zip" (
+    del /q "photogimp-data.zip"
+)
 echo --------------------------------------------------
 curl -L -o "photogimp-data.zip" %url%
 
 :install
 echo -------------------------------------------------
-tar -zxvf "photogimp-data.zip" -C "%AppData%" --strip-components=5 "PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP"
+tar -zxvf "photogimp-data.zip" -C "%AppData%/GIMP" --strip-components=6 "PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/*"
 echo ##################################################
 echo Finish.
 pause > nul
