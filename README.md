@@ -14,6 +14,8 @@
 1. Install [**GIMP**](https://www.gimp.org/downloads).
 2. Download the [**`PhotoGIMP-Windows-Installer.bat`**](https://github.com/kaiohsg/photogimp-windows/releases/latest) and run.
 
+You can change the GIMP version by editing the `.bat` file (`set "gimpVersion=2.10"` to `set "gimpVersion=3.0"`).
+
 [![PhotoGIMP Windows](https://github.com/KaioHSG/PhotoGimpWindows/assets/96930584/30eef373-eb75-4d20-916d-010db8cbe8fb)](#)
 
 ## Note
