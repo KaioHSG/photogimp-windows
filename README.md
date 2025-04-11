@@ -16,7 +16,7 @@
 
 For GIMP 2.10, download [**version 1.5**](https://github.com/KaioHSG/photogimp-windows/releases/tag/1.5).
 
-[![PhotoGIMP Windows](https://github.com/KaioHSG/PhotoGimpWindows/assets/96930584/30eef373-eb75-4d20-916d-010db8cbe8fb)](#)
+[![GIMP with PhotoGIMP](https://github.com/KaioHSG/PhotoGimpWindows/assets/96930584/30eef373-eb75-4d20-916d-010db8cbe8fb)](#)
 
 ## Note
 
@@ -24,4 +24,4 @@ To install, you need an internet connection or to download `PhotoGIMP.zip` from 
 
 ## Credits
 
-This is a fork of [PhotoGIMP](https://github.com/Diolinux/PhotoGIMP) by [Diolinux](https://github.com/Diolinux). I just made a simple installer for Windows.
+All the installed content is provided by the [PhotoGIMP](https://github.com/Diolinux/PhotoGIMP) repository. I just made a simple installer for Windows.
