@@ -1,8 +1,8 @@
 @echo off
-set "gimpVersion=2.10"
-set "version=1.5"
-title PhotoGIMP Windows Installer v%version%
-echo PhotoGIMP Windows Installer v%version%
+set "gimpVersion=3.0"
+set "version=1.6"
+title PhotoGIMP Windows Installer
+echo PhotoGIMP Windows Installer (v%version%)
 if exist "%appData%\GIMP\%gimpVersion%" (
     echo --------------------------------------------------
     choice /c yn /m "This will erase your config (%appData%\GIMP\%gimpVersion%). Continue"
@@ -27,7 +27,7 @@ curl -L -o "PhotoGIMP.zip" %url%
 
 :install
 echo -------------------------------------------------
-tar -zxvf "PhotoGIMP.zip" -C "%appData%/GIMP/%gimpVersion%" --strip-components=7 "PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP"
+tar -zxvf "PhotoGIMP.zip" -C "%appData%/GIMP/%gimpVersion%" --strip-components=1 "3.0"
 echo ##################################################
 echo Install finish.
 pause > nul
