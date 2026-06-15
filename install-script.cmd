@@ -1,6 +1,6 @@
 @echo off
 
-set "gimpVersion=3.2"
+set "gimpVersion=X.X"
 set "version=1.7"
 
 title PhotoGIMP Windows Installer (v%version%)
