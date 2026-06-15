@@ -8,7 +8,7 @@ title PhotoGIMP Windows Installer (v%version%)
 echo PhotoGIMP Windows for GIMP %gimpVersion%
 echo Download GIMP in: https://download.gimp.org/gimp/v%gimpVersion%/windows/
 echo --------------------------------------------------
-if exist "%appData%\GIMP\%gimpVersion%" (goto :nexist) else (goto :exist)
+if exist "%appData%\GIMP\%gimpVersion%" (goto :noExist) else (goto :exist)
 
 :exist
 choice /c yn /m "Start installation"
