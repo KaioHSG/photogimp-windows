@@ -15,10 +15,9 @@ choice /c yn /m "Start installation"
 if %errorLevel% equ 2 exit /b
 goto :install
 
-:noexist
+:noExist
 choice /c yn /m "This will erase your config (%appData%\GIMP\%gimpVersion%). Continue"
 if %errorLevel% equ 2 exit /b
-echo %errorlevel%
 echo -------------------------------------------------
 xcopy "%appData%\GIMP\%gimpVersion%\" "%appData%\GIMP\%gimpVersion%-bak\" /s /-y
 goto :install
