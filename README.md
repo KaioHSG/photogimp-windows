@@ -2,7 +2,7 @@
 [![PhotoGIMP](https://img.shields.io/badge/photogimp-v3.0-blue)](https://github.com/Diolinux/PhotoGIMP/releases/latest)
 [![GIMP](https://img.shields.io/badge/gimp-v3.2-blue)](https://download.gimp.org/gimp/v3.2/windows/)
 [![Downloads](https://img.shields.io/github/downloads/KaioHSG/photogimp-windows/total)](https://github.com/KaioHSG/photogimp-windows/releases)
-[![VirusTotal](https://img.shields.io/badge/virustotal-status-navy)](https://www.virustotal.com/gui/file/73f17225bf72655f363df2c5d4a63744db68f39ea684db0dc73c28f54a61d724)
+[![VirusTotal](https://img.shields.io/badge/virustotal-status-navy)](https://www.virustotal.com/gui/file/b0ce40d7b00f66f367fec4f413e6d9a972794793e46760837cf395b5f70f0af0?nocache=1)
 
 # PhotoGIMP Windows
 
@@ -13,7 +13,7 @@
 ## How to install?
 
 1. Install [**GIMP 3.2**](https://download.gimp.org/gimp/v3.2/windows/).
-2. Download the [**`PhotoGIMP-Windows-for-GIMP-3.2.cmd`**](https://github.com/kaiohsg/photogimp-windows/releases/latest) and run.
+2. Download the [**`PhotoGIMP-Windows-GIMP-3.2.cmd`**](https://github.com/kaiohsg/photogimp-windows/releases/latest) and run.
 
 For GIMP 2.10, download [**version 1.5**](https://github.com/KaioHSG/photogimp-windows/releases/tag/1.5).
 
