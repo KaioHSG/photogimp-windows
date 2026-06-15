@@ -12,8 +12,8 @@
 
 ## How to install?
 
-1. Install [**GIMP 3.2**](https://download.gimp.org/gimp/v3.2/windows/).
-2. Download the [**`PhotoGIMP-Windows-GIMP-3.2.cmd`**](https://github.com/kaiohsg/photogimp-windows/releases/latest) and run.
+1. Install [**GIMP**](https://www.gimp.org/downloads/).
+2. Download the [**`PhotoGIMP-Windows-for-GIMP-3.x.cmd`**](https://github.com/kaiohsg/photogimp-windows/releases/latest) and run.
 
 For GIMP 2.10, download [**version 1.5**](https://github.com/KaioHSG/photogimp-windows/releases/tag/1.5).
 
