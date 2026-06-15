@@ -2,7 +2,7 @@
 [![PhotoGIMP](https://img.shields.io/badge/photogimp-v3.0-blue)](https://github.com/Diolinux/PhotoGIMP/releases/latest)
 [![GIMP](https://img.shields.io/badge/gimp-v3.2-blue)](https://download.gimp.org/gimp/v3.2/windows/)
 [![Downloads](https://img.shields.io/github/downloads/KaioHSG/photogimp-windows/total)](https://github.com/KaioHSG/photogimp-windows/releases)
-[![VirusTotal](https://img.shields.io/badge/virustotal-status-navy)](https://www.virustotal.com/gui/file/b0ce40d7b00f66f367fec4f413e6d9a972794793e46760837cf395b5f70f0af0?nocache=1)
+[![VirusTotal](https://img.shields.io/badge/virustotal-status-navy)](https://www.virustotal.com/gui/file/784df7230a5bee5c72895ac44e71afc2b10a41825611f93a48b064a9b4fa48d1)
 
 # PhotoGIMP Windows
 
