@@ -22,3 +22,5 @@ For GIMP 2.10, download [**version 1.5**](https://github.com/KaioHSG/photogimp-w
 ## Credits
 
 All the installed content is provided by the [PhotoGIMP](https://github.com/Diolinux/PhotoGIMP) repository. I just made a simple installer for Windows.
+
+Packaged using [Disposable Bundler](https://github.com/KaioHSG/disposable-bundler).
