@@ -1,6 +1,6 @@
 [![Release](https://img.shields.io/github/v/release/KaioHSG/photogimp-windows)](https://github.com/KaioHSG/photogimp-windows/releases/latest)
 [![PhotoGIMP](https://img.shields.io/badge/photogimp-v3.0-blue)](https://github.com/Diolinux/PhotoGIMP/releases/latest)
-[![GIMP](https://img.shields.io/badge/gimp-v3.2-blue)](https://github.com/Diolinux/PhotoGIMP/releases/latest)
+[![GIMP](https://img.shields.io/badge/gimp-v3.2-blue)](https://download.gimp.org/gimp/v3.2/windows/)
 [![Downloads](https://img.shields.io/github/downloads/KaioHSG/photogimp-windows/total)](https://github.com/KaioHSG/photogimp-windows/releases)
 [![VirusTotal](https://img.shields.io/badge/virustotal-status-navy)](https://www.virustotal.com/gui/file/73f17225bf72655f363df2c5d4a63744db68f39ea684db0dc73c28f54a61d724)
 
