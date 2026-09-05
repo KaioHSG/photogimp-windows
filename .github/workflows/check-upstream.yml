@@ -1,0 +1,125 @@
+name: Check PhotoGIMP Upstream
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: check-upstream
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get versions
+        id: versions
+        shell: pwsh
+        run: |
+          $theirs = (Invoke-RestMethod -Uri "https://api.github.com/repos/Diolinux/PhotoGIMP/releases/latest").tag_name
+          $theirs = $theirs -replace '^v', ''
+          try {
+            $ours = (Invoke-RestMethod -Uri "https://api.github.com/repos/${{ github.repository }}/releases/latest").tag_name
+            $ours = $ours -replace '^v', '' -replace '-pg.*', ''
+          } catch {
+            $ours = (Select-String -Path src\install-script.cmd -Pattern 'set version=').Line -replace 'set version='
+            $ours = $ours.Trim()
+          }
+          $tag = "v${ours}-pg${theirs}"
+          echo "ours=$ours" >> $env:GITHUB_OUTPUT
+          echo "theirs=$theirs" >> $env:GITHUB_OUTPUT
+          echo "tag=$tag" >> $env:GITHUB_OUTPUT
+
+      - name: Check if already released
+        id: check
+        shell: pwsh
+        run: |
+          $tag = "${{ steps.versions.outputs.tag }}"
+          try {
+            $status = (Invoke-WebRequest -Uri "https://api.github.com/repos/${{ github.repository }}/releases/tags/$tag" -Method Head -SkipHttpErrorCheck).StatusCode
+            if ($status -eq 200) {
+              echo "Release $tag already exists. Nothing to do."
+              echo "skip=true" >> $env:GITHUB_OUTPUT
+            } else {
+              echo "skip=false" >> $env:GITHUB_OUTPUT
+            }
+          } catch {
+            echo "skip=false" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Download PhotoGIMP.zip
+        if: steps.check.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/Diolinux/PhotoGIMP/releases/latest/download/PhotoGIMP.zip" -OutFile "PhotoGIMP.zip"
+
+      - name: Extract and update files
+        if: steps.check.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          Expand-Archive -Path "PhotoGIMP.zip" -DestinationPath "upstream" -Force
+          $root = Get-ChildItem -Path "upstream" -Directory | Select-Object -First 1
+          if (-not $root) {
+            Write-Error "No root folder found in PhotoGIMP.zip"
+            exit 1
+          }
+          Remove-Item -Path "src\photogimp\*" -Recurse -Force -ErrorAction SilentlyContinue
+          Copy-Item -Path "$($root.FullName)\*" -Destination "src\photogimp\" -Recurse -Force
+          Remove-Item -Path "PhotoGIMP.zip" -Force
+
+      - name: Commit and push
+        if: steps.check.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          $branch = git rev-parse --abbrev-ref HEAD
+          git pull --rebase origin $branch 2>&1 | Out-Null
+          if (-not $?) {
+            git rebase --abort 2>&1 | Out-Null
+            git fetch origin $branch
+            git reset --hard origin/$branch
+          }
+          git add src/photogimp/
+          $diff = git diff --cached --stat
+          if (-not $diff) {
+            Write-Error "No changes in upstream files"
+            exit 1
+          }
+          git commit -m "Update to PhotoGIMP ${{ steps.versions.outputs.theirs }}"
+          $maxRetries = 5
+          $retryDelay = 5
+          for ($i = 0; $i -lt $maxRetries; $i++) {
+            git pull --rebase origin $branch 2>&1 | Out-Null
+            git push origin $branch 2>&1 | Out-Null
+            if ($?) { break }
+            if ($i -lt ($maxRetries - 1)) {
+              Start-Sleep -Seconds $retryDelay
+            } else {
+              exit 1
+            }
+          }
+
+      - name: Push tag
+        if: steps.check.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          $tag = "${{ steps.versions.outputs.tag }}"
+          git tag "$tag"
+          $maxRetries = 5
+          $retryDelay = 5
+          for ($i = 0; $i -lt $maxRetries; $i++) {
+            git push origin "$tag" 2>&1 | Out-Null
+            if ($?) { break }
+            if ($i -lt ($maxRetries - 1)) {
+              Start-Sleep -Seconds $retryDelay
+            } else {
+              exit 1
+            }
+          }

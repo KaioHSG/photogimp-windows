@@ -1,0 +1,47 @@
+name: Build Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Version tag (e.g., v1.9)'
+        required: true
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        shell: pwsh
+        run: |
+          if ("${{ github.event_name }}" -eq "push") {
+            echo "tag=${{ github.ref_name }}" >> $env:GITHUB_OUTPUT
+          } else {
+            echo "tag=${{ github.event.inputs.tag }}" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Download ezcab
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/KaioHSG/ezcab/releases/latest/download/ezcab.cmd" -OutFile "ezcab.cmd"
+
+      - name: Build package
+        shell: cmd
+        run: |
+          .\ezcab.cmd /s /l:install-script.cmd src PhotoGIMP-Windows.cmd
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          files: PhotoGIMP-Windows.cmd
+          generate_release_notes: true
