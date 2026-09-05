@@ -1,8 +1,7 @@
 [![Release](https://img.shields.io/github/v/release/KaioHSG/photogimp-windows)](https://github.com/KaioHSG/photogimp-windows/releases/latest)
-[![PhotoGIMP](https://img.shields.io/badge/photogimp-v3.0-blue)](https://github.com/Diolinux/PhotoGIMP/releases/tag/3.0)
-[![GIMP](https://img.shields.io/badge/gimp-v3.2-blue)](https://download.gimp.org/gimp/v3.2/windows/)
+[![PhotoGIMP](https://img.shields.io/github/v/release/Diolinux/PhotoGIMP?label=photogimp)](https://github.com/Diolinux/PhotoGIMP/releases/latest)
+[![GIMP](https://img.shields.io/gitlab/v/release/GNOME%2Fgimp?gitlab_url=https%3A%2F%2Fgitlab.gnome.org&label=gimp)](https://www.gimp.org/downloads/)
 [![Downloads](https://img.shields.io/github/downloads/KaioHSG/photogimp-windows/total)](https://github.com/KaioHSG/photogimp-windows/releases)
-[![VirusTotal](https://img.shields.io/badge/virustotal-status-navy)](https://www.virustotal.com/gui/file/784df7230a5bee5c72895ac44e71afc2b10a41825611f93a48b064a9b4fa48d1)
 
 # PhotoGIMP Windows
 
@@ -12,15 +11,15 @@
 
 ## How to install?
 
-1. Install [**GIMP**](https://www.gimp.org/downloads/).
-2. Download the [**`PhotoGIMP-Windows-for-GIMP-3.x.cmd`**](https://github.com/kaiohsg/photogimp-windows/releases/latest) and run.
+1. Install [**GIMP 3**](https://www.gimp.org/downloads/).
+2. Download the [**`PhotoGIMP-Windows.cmd`**](https://github.com/kaiohsg/photogimp-windows/releases/latest) and run.
 
 ![GIMP with PhotoGIMP](https://github.com/KaioHSG/PhotoGimpWindows/assets/96930584/30eef373-eb75-4d20-916d-010db8cbe8fb)
 
-For GIMP 2.10, download [**version 1.5**](https://github.com/KaioHSG/photogimp-windows/releases/tag/1.5).
+For GIMP 2, download [**version 1.5**](https://github.com/KaioHSG/photogimp-windows/releases/tag/1.5).
 
 ## Credits
 
 All the installed content is provided by the [PhotoGIMP](https://github.com/Diolinux/PhotoGIMP) repository. I just made a simple installer for Windows.
 
-Packaged using [Disposable Bundler](https://github.com/KaioHSG/disposable-bundler).
+Packaged using [EZCab](https://github.com/KaioHSG/ezcab).
