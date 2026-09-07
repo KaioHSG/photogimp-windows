@@ -2,7 +2,7 @@ name: Check PhotoGIMP Upstream
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */72 * * *'
   workflow_dispatch:
 
 permissions:
@@ -104,6 +104,8 @@ jobs:
           }
 
           Remove-Item -Path "src\pg$currentPg" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "src\pg$theirs" -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Path "src\pg$theirs" -Force | Out-Null
           Copy-Item -Path "$($root.FullName)\*" -Destination "src\pg$theirs" -Recurse -Force
           Remove-Item -Path "PhotoGIMP.zip" -Force
 
