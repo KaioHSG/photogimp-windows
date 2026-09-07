@@ -72,6 +72,7 @@ jobs:
 
       - name: Compare pgVersion
         if: steps.check.outputs.skip != 'true'
+        id: compare
         shell: pwsh
         run: |
           $current = "${{ steps.versions.outputs.currentPg }}"
@@ -81,16 +82,17 @@ jobs:
             echo "skip=true" >> $env:GITHUB_OUTPUT
           } else {
             echo "pgVersion $current differs from upstream $theirs. Updating."
+            echo "skip=false" >> $env:GITHUB_OUTPUT
           }
 
       - name: Download PhotoGIMP.zip
-        if: steps.check.outputs.skip != 'true'
+        if: steps.compare.outputs.skip != 'true'
         shell: pwsh
         run: |
           Invoke-WebRequest -Uri "https://github.com/Diolinux/PhotoGIMP/releases/latest/download/PhotoGIMP.zip" -OutFile "PhotoGIMP.zip"
 
       - name: Extract and update files
-        if: steps.check.outputs.skip != 'true'
+        if: steps.compare.outputs.skip != 'true'
         shell: pwsh
         run: |
           $currentPg = "${{ steps.versions.outputs.currentPg }}"
@@ -112,7 +114,7 @@ jobs:
           (Get-Content src\install-script.cmd) -replace 'set pgVersion=.*', "set pgVersion=$theirs" | Set-Content src\install-script.cmd
 
       - name: Commit and push
-        if: steps.check.outputs.skip != 'true'
+        if: steps.compare.outputs.skip != 'true'
         shell: pwsh
         run: |
           $branch = git rev-parse --abbrev-ref HEAD
@@ -137,7 +139,7 @@ jobs:
           }
 
       - name: Push tag
-        if: steps.check.outputs.skip != 'true'
+        if: steps.compare.outputs.skip != 'true'
         shell: pwsh
         run: |
           $tag = "${{ steps.versions.outputs.tag }}"
@@ -153,3 +155,11 @@ jobs:
               exit 1
             }
           }
+
+      - name: Trigger build-release
+        if: steps.compare.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          gh workflow run "Build Release" --ref ${{ github.ref_name }} --field tag="${{ steps.versions.outputs.tag }}"
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
