@@ -32,7 +32,7 @@ jobs:
       - name: Download ezcab
         shell: pwsh
         run: |
-          Invoke-WebRequest -Uri "https://github.com/KaioHSG/ezcab/releases/latest/download/ezcab.cmd" -OutFile "ezcab.cmd"
+          Invoke-WebRequest -Uri "https://github.com/KaioHSG/ezcab/releases/download/v1.0/ezcab.cmd" -OutFile "ezcab.cmd"
 
       - name: Build package
         shell: cmd

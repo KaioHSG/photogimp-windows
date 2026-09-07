@@ -5,7 +5,7 @@ set pgVersion=3.1
 set gimpVersion=3
 set "gimpPath=%appData%\GIMP"
 
-title PhotoGIMP Windows Installer (v%version%)
+title PhotoGIMP Windows Installer (v%version%-pg%pgVersion%)
 
 setlocal enabledelayedexpansion
 
