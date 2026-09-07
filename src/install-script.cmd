@@ -1,13 +1,13 @@
 @echo off
 
 set version=1.8
+set pgVersion=3.1
 set gimpVersion=3
 set "gimpPath=%appData%\GIMP"
 
 title PhotoGIMP Windows Installer (v%version%)
 
 setlocal enabledelayedexpansion
-set "highest="
 
 for /d %%i in ("%gimpPath%\%gimpVersion%.*") do (
     set "v=%%~nxi"
@@ -17,8 +17,8 @@ for /d %%i in ("%gimpPath%\%gimpVersion%.*") do (
     )
 )
 
-if not defined highest set "highest=%gimpVersion%.0"
-endlocal && set "gimpVersion=%highest%"
+if not defined highest set highest=%gimpVersion%.0
+endlocal && set gimpVersion=%highest%
 
 echo PhotoGIMP Windows, a Diolinux/PhotoGIMP installer.
 echo Download GIMP in: https://www.gimp.org/downloads/
@@ -47,7 +47,7 @@ goto :install
 
 :install
 echo -------------------------------------------------
-xcopy ".\photogimp\" "%gimpPath%\%gimpVersion%\" /e /y
+xcopy ".\pg%pgVersion%\" "%gimpPath%\%gimpVersion%\" /e /y
 
 echo ##################################################
 echo Install finish.

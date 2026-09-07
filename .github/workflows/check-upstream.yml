@@ -24,6 +24,8 @@ jobs:
         run: |
           $theirs = (Invoke-RestMethod -Uri "https://api.github.com/repos/Diolinux/PhotoGIMP/releases/latest").tag_name
           $theirs = $theirs -replace '^v', ''
+          $currentPg = (Select-String -Path src\install-script.cmd -Pattern 'set pgVersion=').Line -replace 'set pgVersion=', ''
+          $currentPg = $currentPg.Trim()
           try {
             $ours = (Invoke-RestMethod -Uri "https://api.github.com/repos/${{ github.repository }}/releases/latest").tag_name
             $ours = $ours -replace '^v', '' -replace '-pg.*', ''
@@ -32,8 +34,9 @@ jobs:
             $ours = $ours.Trim()
           }
           $tag = "v${ours}-pg${theirs}"
-          echo "ours=$ours" >> $env:GITHUB_OUTPUT
+          echo "currentPg=$currentPg" >> $env:GITHUB_OUTPUT
           echo "theirs=$theirs" >> $env:GITHUB_OUTPUT
+          echo "ours=$ours" >> $env:GITHUB_OUTPUT
           echo "tag=$tag" >> $env:GITHUB_OUTPUT
 
       - name: Check if already released
@@ -53,27 +56,7 @@ jobs:
             echo "skip=false" >> $env:GITHUB_OUTPUT
           }
 
-      - name: Download PhotoGIMP.zip
-        if: steps.check.outputs.skip != 'true'
-        shell: pwsh
-        run: |
-          Invoke-WebRequest -Uri "https://github.com/Diolinux/PhotoGIMP/releases/latest/download/PhotoGIMP.zip" -OutFile "PhotoGIMP.zip"
-
-      - name: Extract and update files
-        if: steps.check.outputs.skip != 'true'
-        shell: pwsh
-        run: |
-          Expand-Archive -Path "PhotoGIMP.zip" -DestinationPath "upstream" -Force
-          $root = Get-ChildItem -Path "upstream" -Directory | Select-Object -First 1
-          if (-not $root) {
-            Write-Error "No root folder found in PhotoGIMP.zip"
-            exit 1
-          }
-          Remove-Item -Path "src\photogimp\*" -Recurse -Force -ErrorAction SilentlyContinue
-          Copy-Item -Path "$($root.FullName)\*" -Destination "src\photogimp\" -Recurse -Force
-          Remove-Item -Path "PhotoGIMP.zip" -Force
-
-      - name: Commit and push
+      - name: Sync with remote
         if: steps.check.outputs.skip != 'true'
         shell: pwsh
         run: |
@@ -86,11 +69,56 @@ jobs:
             git fetch origin $branch
             git reset --hard origin/$branch
           }
-          git add src/photogimp/
+
+      - name: Compare pgVersion
+        if: steps.check.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          $current = "${{ steps.versions.outputs.currentPg }}"
+          $theirs = "${{ steps.versions.outputs.theirs }}"
+          if ($current -eq $theirs) {
+            echo "pgVersion $current matches upstream $theirs. Nothing to do."
+            echo "skip=true" >> $env:GITHUB_OUTPUT
+          } else {
+            echo "pgVersion $current differs from upstream $theirs. Updating."
+          }
+
+      - name: Download PhotoGIMP.zip
+        if: steps.check.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/Diolinux/PhotoGIMP/releases/latest/download/PhotoGIMP.zip" -OutFile "PhotoGIMP.zip"
+
+      - name: Extract and update files
+        if: steps.check.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          $currentPg = "${{ steps.versions.outputs.currentPg }}"
+          $theirs = "${{ steps.versions.outputs.theirs }}"
+
+          Expand-Archive -Path "PhotoGIMP.zip" -DestinationPath "upstream" -Force
+          $root = Get-ChildItem -Path "upstream" -Directory | Select-Object -First 1
+          if (-not $root) {
+            Write-Error "No root folder found in PhotoGIMP.zip"
+            exit 1
+          }
+
+          Remove-Item -Path "src\pg$currentPg" -Recurse -Force -ErrorAction SilentlyContinue
+          Copy-Item -Path "$($root.FullName)\*" -Destination "src\pg$theirs" -Recurse -Force
+          Remove-Item -Path "PhotoGIMP.zip" -Force
+
+          (Get-Content src\install-script.cmd) -replace 'set pgVersion=.*', "set pgVersion=$theirs" | Set-Content src\install-script.cmd
+
+      - name: Commit and push
+        if: steps.check.outputs.skip != 'true'
+        shell: pwsh
+        run: |
+          $branch = git rev-parse --abbrev-ref HEAD
+          git add src/
           $diff = git diff --cached --stat
           if (-not $diff) {
-            Write-Error "No changes in upstream files"
-            exit 1
+            echo "No changes. Nothing to commit."
+            exit 0
           }
           git commit -m "Update to PhotoGIMP ${{ steps.versions.outputs.theirs }}"
           $maxRetries = 5
