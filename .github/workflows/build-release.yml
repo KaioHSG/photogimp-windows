@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Version tag (e.g., v1.9-pg3.0)'
+        description: 'Version tag (e.g., v1.0-pg3.0)'
         required: true
   push:
     tags:
@@ -32,7 +32,7 @@ jobs:
       - name: Download ezcab
         shell: pwsh
         run: |
-          Invoke-WebRequest -Uri "https://github.com/KaioHSG/ezcab/releases/download/v1.0/ezcab.cmd" -OutFile "ezcab.cmd"
+          Invoke-WebRequest -Uri "https://github.com/KaioHSG/ezcab/releases/download/v1.1/ezcab.cmd" -OutFile "ezcab.cmd"
 
       - name: Build package
         shell: cmd
